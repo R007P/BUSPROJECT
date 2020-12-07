@@ -1,0 +1,695 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbNewBusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tblAdmin">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Name="AdminId" Type="int" Nullable="false" />
+          <Property Name="EmailId" Type="varchar" MaxLength="40" />
+          <Property Name="username" Type="varchar" MaxLength="30" />
+          <Property Name="Password_" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="tblBooking">
+          <Key>
+            <PropertyRef Name="BookingID" />
+          </Key>
+          <Property Name="Index_Book" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookingID" Type="varchar" MaxLength="9" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Source_B" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Destination_B" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="StartDate" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="StartTime" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TicketType" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TravelFare" Type="real" Nullable="false" />
+          <Property Name="PaymentId" Type="varchar" MaxLength="9" />
+          <Property Name="CustUsername" Type="varchar" MaxLength="40" />
+          <Property Name="EmailId" Type="nvarchar" MaxLength="25" />
+          <Property Name="BusNo" Type="varchar" MaxLength="15" />
+          <Property Name="SelectedSeats" Type="nvarchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="tblBus">
+          <Key>
+            <PropertyRef Name="BusNo" />
+          </Key>
+          <Property Name="BusNo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="NoOfSeats" Type="int" Nullable="false" />
+          <Property Name="Source_" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Destination" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="ViaStop" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="StartTime" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="EndTime" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PerSeatCost" Type="real" Nullable="false" />
+          <Property Name="BusType" Type="bit" Nullable="false" />
+          <Property Name="BusName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblCancellation">
+          <Key>
+            <PropertyRef Name="Id_" />
+          </Key>
+          <Property Name="PaymentId" Type="varchar" MaxLength="9" />
+          <Property Name="BookingId" Type="varchar" MaxLength="9" />
+          <Property Name="Refund" Type="real" />
+          <Property Name="Id_" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblCustomer">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="Index_" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Fname" Type="varchar" MaxLength="30" />
+          <Property Name="Lname" Type="varchar" MaxLength="30" />
+          <Property Name="Password_" Type="varchar" MaxLength="20" />
+          <Property Name="EmailId" Type="nvarchar" MaxLength="40" />
+          <Property Name="ContactNo" Type="varchar" MaxLength="20" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" />
+          <Property Name="WalletDetails" Type="real" />
+        </EntityType>
+        <EntityType Name="tblFeedback">
+          <Key>
+            <PropertyRef Name="Id_" />
+          </Key>
+          <Property Name="Id_" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookingID" Type="varchar" MaxLength="9" />
+          <Property Name="Question1" Type="int" />
+          <Property Name="Question2" Type="int" />
+          <Property Name="Question3" Type="int" />
+          <Property Name="Question4" Type="int" />
+          <Property Name="Question5" Type="int" />
+        </EntityType>
+        <EntityType Name="tblPayment">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="Index_Pay" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentId" Type="varchar" MaxLength="9" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Amount" Type="real" Nullable="false" />
+          <Property Name="PaymentBy" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblReturnTicket">
+          <Key>
+            <PropertyRef Name="Id_" />
+          </Key>
+          <Property Name="BookingID" Type="varchar" MaxLength="9" />
+          <Property Name="Return_data" Type="varchar" MaxLength="10" />
+          <Property Name="Return_Time" Type="varchar" MaxLength="10" />
+          <Property Name="Id_" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblUnAuthCustomer">
+          <Key>
+            <PropertyRef Name="EmailId" />
+          </Key>
+          <Property Name="Fname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Lname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="EmailId" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="PhoneNo" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK__tblBookin__BusNo__5AEE82B9">
+          <End Role="tblBus" Type="Self.tblBus" Multiplicity="0..1" />
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBus">
+              <PropertyRef Name="BusNo" />
+            </Principal>
+            <Dependent Role="tblBooking">
+              <PropertyRef Name="BusNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblBookin__CustU__59063A47">
+          <End Role="tblCustomer" Type="Self.tblCustomer" Multiplicity="0..1" />
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomer">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="tblBooking">
+              <PropertyRef Name="CustUsername" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblBookin__Email__59FA5E80">
+          <End Role="tblUnAuthCustomer" Type="Self.tblUnAuthCustomer" Multiplicity="0..1" />
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUnAuthCustomer">
+              <PropertyRef Name="EmailId" />
+            </Principal>
+            <Dependent Role="tblBooking">
+              <PropertyRef Name="EmailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblBookin__Payme__5812160E">
+          <End Role="tblPayment" Type="Self.tblPayment" Multiplicity="0..1" />
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPayment">
+              <PropertyRef Name="PaymentId" />
+            </Principal>
+            <Dependent Role="tblBooking">
+              <PropertyRef Name="PaymentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblCancel__Booki__619B8048">
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="0..1" />
+          <End Role="tblCancellation" Type="Self.tblCancellation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBooking">
+              <PropertyRef Name="BookingID" />
+            </Principal>
+            <Dependent Role="tblCancellation">
+              <PropertyRef Name="BookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblCancel__Payme__60A75C0F">
+          <End Role="tblPayment" Type="Self.tblPayment" Multiplicity="0..1" />
+          <End Role="tblCancellation" Type="Self.tblCancellation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPayment">
+              <PropertyRef Name="PaymentId" />
+            </Principal>
+            <Dependent Role="tblCancellation">
+              <PropertyRef Name="PaymentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblFeedba__Booki__02FC7413">
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="0..1" />
+          <End Role="tblFeedback" Type="Self.tblFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBooking">
+              <PropertyRef Name="BookingID" />
+            </Principal>
+            <Dependent Role="tblFeedback">
+              <PropertyRef Name="BookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblReturn__Booki__5CD6CB2B">
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="0..1" />
+          <End Role="tblReturnTicket" Type="Self.tblReturnTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBooking">
+              <PropertyRef Name="BookingID" />
+            </Principal>
+            <Dependent Role="tblReturnTicket">
+              <PropertyRef Name="BookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbNewBusModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAdmin" EntityType="Self.tblAdmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBooking" EntityType="Self.tblBooking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBus" EntityType="Self.tblBus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCancellation" EntityType="Self.tblCancellation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCustomer" EntityType="Self.tblCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFeedback" EntityType="Self.tblFeedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPayment" EntityType="Self.tblPayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblReturnTicket" EntityType="Self.tblReturnTicket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUnAuthCustomer" EntityType="Self.tblUnAuthCustomer" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblBookin__BusNo__5AEE82B9" Association="Self.FK__tblBookin__BusNo__5AEE82B9">
+            <End Role="tblBus" EntitySet="tblBus" />
+            <End Role="tblBooking" EntitySet="tblBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblBookin__CustU__59063A47" Association="Self.FK__tblBookin__CustU__59063A47">
+            <End Role="tblCustomer" EntitySet="tblCustomer" />
+            <End Role="tblBooking" EntitySet="tblBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblBookin__Email__59FA5E80" Association="Self.FK__tblBookin__Email__59FA5E80">
+            <End Role="tblUnAuthCustomer" EntitySet="tblUnAuthCustomer" />
+            <End Role="tblBooking" EntitySet="tblBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblBookin__Payme__5812160E" Association="Self.FK__tblBookin__Payme__5812160E">
+            <End Role="tblPayment" EntitySet="tblPayment" />
+            <End Role="tblBooking" EntitySet="tblBooking" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblCancel__Booki__619B8048" Association="Self.FK__tblCancel__Booki__619B8048">
+            <End Role="tblBooking" EntitySet="tblBooking" />
+            <End Role="tblCancellation" EntitySet="tblCancellation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblCancel__Payme__60A75C0F" Association="Self.FK__tblCancel__Payme__60A75C0F">
+            <End Role="tblPayment" EntitySet="tblPayment" />
+            <End Role="tblCancellation" EntitySet="tblCancellation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblFeedba__Booki__02FC7413" Association="Self.FK__tblFeedba__Booki__02FC7413">
+            <End Role="tblBooking" EntitySet="tblBooking" />
+            <End Role="tblFeedback" EntitySet="tblFeedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblReturn__Booki__5CD6CB2B" Association="Self.FK__tblReturn__Booki__5CD6CB2B">
+            <End Role="tblBooking" EntitySet="tblBooking" />
+            <End Role="tblReturnTicket" EntitySet="tblReturnTicket" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbNewBusModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tblAdmin">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Name="AdminId" Type="Int32" Nullable="false" />
+          <Property Name="EmailId" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Password_" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblBooking">
+          <Key>
+            <PropertyRef Name="BookingID" />
+          </Key>
+          <Property Name="Index_Book" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookingID" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Source_B" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Destination_B" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StartDate" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StartTime" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TicketType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TravelFare" Type="Single" Nullable="false" />
+          <Property Name="PaymentId" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="CustUsername" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="EmailId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="BusNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="SelectedSeats" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblBu" Relationship="Self.FK__tblBookin__BusNo__5AEE82B9" FromRole="tblBooking" ToRole="tblBus" />
+          <NavigationProperty Name="tblCustomer" Relationship="Self.FK__tblBookin__CustU__59063A47" FromRole="tblBooking" ToRole="tblCustomer" />
+          <NavigationProperty Name="tblUnAuthCustomer" Relationship="Self.FK__tblBookin__Email__59FA5E80" FromRole="tblBooking" ToRole="tblUnAuthCustomer" />
+          <NavigationProperty Name="tblPayment" Relationship="Self.FK__tblBookin__Payme__5812160E" FromRole="tblBooking" ToRole="tblPayment" />
+          <NavigationProperty Name="tblCancellations" Relationship="Self.FK__tblCancel__Booki__619B8048" FromRole="tblBooking" ToRole="tblCancellation" />
+          <NavigationProperty Name="tblReturnTickets" Relationship="Self.FK__tblReturn__Booki__5CD6CB2B" FromRole="tblBooking" ToRole="tblReturnTicket" />
+          <NavigationProperty Name="tblFeedbacks" Relationship="dbNewBusModel.FK__tblFeedba__Booki__02FC7413" FromRole="tblBooking" ToRole="tblFeedback" />
+        </EntityType>
+        <EntityType Name="tblBu">
+          <Key>
+            <PropertyRef Name="BusNo" />
+          </Key>
+          <Property Name="BusNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NoOfSeats" Type="Int32" Nullable="false" />
+          <Property Name="Source_" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Destination" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ViaStop" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StartTime" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EndTime" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PerSeatCost" Type="Single" Nullable="false" />
+          <Property Name="BusType" Type="Boolean" Nullable="false" />
+          <Property Name="BusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblBookings" Relationship="Self.FK__tblBookin__BusNo__5AEE82B9" FromRole="tblBus" ToRole="tblBooking" />
+        </EntityType>
+        <EntityType Name="tblCancellation">
+          <Key>
+            <PropertyRef Name="Id_" />
+          </Key>
+          <Property Name="PaymentId" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="BookingId" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Refund" Type="Single" />
+          <Property Name="Id_" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="tblBooking" Relationship="Self.FK__tblCancel__Booki__619B8048" FromRole="tblCancellation" ToRole="tblBooking" />
+          <NavigationProperty Name="tblPayment" Relationship="Self.FK__tblCancel__Payme__60A75C0F" FromRole="tblCancellation" ToRole="tblPayment" />
+        </EntityType>
+        <EntityType Name="tblCustomer">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="Index_" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Lname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Password_" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EmailId" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="WalletDetails" Type="Single" />
+          <NavigationProperty Name="tblBookings" Relationship="Self.FK__tblBookin__CustU__59063A47" FromRole="tblCustomer" ToRole="tblBooking" />
+        </EntityType>
+        <EntityType Name="tblPayment">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="Index_Pay" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentId" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Amount" Type="Single" Nullable="false" />
+          <Property Name="PaymentBy" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblBookings" Relationship="Self.FK__tblBookin__Payme__5812160E" FromRole="tblPayment" ToRole="tblBooking" />
+          <NavigationProperty Name="tblCancellations" Relationship="Self.FK__tblCancel__Payme__60A75C0F" FromRole="tblPayment" ToRole="tblCancellation" />
+        </EntityType>
+        <EntityType Name="tblReturnTicket">
+          <Key>
+            <PropertyRef Name="Id_" />
+          </Key>
+          <Property Name="BookingID" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Return_data" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Return_Time" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Id_" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="tblBooking" Relationship="Self.FK__tblReturn__Booki__5CD6CB2B" FromRole="tblReturnTicket" ToRole="tblBooking" />
+        </EntityType>
+        <EntityType Name="tblUnAuthCustomer">
+          <Key>
+            <PropertyRef Name="EmailId" />
+          </Key>
+          <Property Name="Fname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailId" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblBookings" Relationship="Self.FK__tblBookin__Email__59FA5E80" FromRole="tblUnAuthCustomer" ToRole="tblBooking" />
+        </EntityType>
+        <Association Name="FK__tblBookin__BusNo__5AEE82B9">
+          <End Role="tblBus" Type="Self.tblBu" Multiplicity="0..1" />
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBus">
+              <PropertyRef Name="BusNo" />
+            </Principal>
+            <Dependent Role="tblBooking">
+              <PropertyRef Name="BusNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblBookin__CustU__59063A47">
+          <End Role="tblCustomer" Type="Self.tblCustomer" Multiplicity="0..1" />
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomer">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="tblBooking">
+              <PropertyRef Name="CustUsername" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblBookin__Email__59FA5E80">
+          <End Role="tblUnAuthCustomer" Type="Self.tblUnAuthCustomer" Multiplicity="0..1" />
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUnAuthCustomer">
+              <PropertyRef Name="EmailId" />
+            </Principal>
+            <Dependent Role="tblBooking">
+              <PropertyRef Name="EmailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblBookin__Payme__5812160E">
+          <End Role="tblPayment" Type="Self.tblPayment" Multiplicity="0..1" />
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPayment">
+              <PropertyRef Name="PaymentId" />
+            </Principal>
+            <Dependent Role="tblBooking">
+              <PropertyRef Name="PaymentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblCancel__Booki__619B8048">
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="0..1" />
+          <End Role="tblCancellation" Type="Self.tblCancellation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBooking">
+              <PropertyRef Name="BookingID" />
+            </Principal>
+            <Dependent Role="tblCancellation">
+              <PropertyRef Name="BookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblReturn__Booki__5CD6CB2B">
+          <End Role="tblBooking" Type="Self.tblBooking" Multiplicity="0..1" />
+          <End Role="tblReturnTicket" Type="Self.tblReturnTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBooking">
+              <PropertyRef Name="BookingID" />
+            </Principal>
+            <Dependent Role="tblReturnTicket">
+              <PropertyRef Name="BookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblCancel__Payme__60A75C0F">
+          <End Role="tblPayment" Type="Self.tblPayment" Multiplicity="0..1" />
+          <End Role="tblCancellation" Type="Self.tblCancellation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPayment">
+              <PropertyRef Name="PaymentId" />
+            </Principal>
+            <Dependent Role="tblCancellation">
+              <PropertyRef Name="PaymentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbNewBusEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tblAdmins" EntityType="Self.tblAdmin" />
+          <EntitySet Name="tblBookings" EntityType="Self.tblBooking" />
+          <EntitySet Name="tblBus" EntityType="Self.tblBu" />
+          <EntitySet Name="tblCancellations" EntityType="Self.tblCancellation" />
+          <EntitySet Name="tblCustomers" EntityType="Self.tblCustomer" />
+          <EntitySet Name="tblPayments" EntityType="Self.tblPayment" />
+          <EntitySet Name="tblReturnTickets" EntityType="Self.tblReturnTicket" />
+          <EntitySet Name="tblUnAuthCustomers" EntityType="Self.tblUnAuthCustomer" />
+          <AssociationSet Name="FK__tblBookin__BusNo__5AEE82B9" Association="Self.FK__tblBookin__BusNo__5AEE82B9">
+            <End Role="tblBus" EntitySet="tblBus" />
+            <End Role="tblBooking" EntitySet="tblBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblBookin__CustU__59063A47" Association="Self.FK__tblBookin__CustU__59063A47">
+            <End Role="tblCustomer" EntitySet="tblCustomers" />
+            <End Role="tblBooking" EntitySet="tblBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblBookin__Email__59FA5E80" Association="Self.FK__tblBookin__Email__59FA5E80">
+            <End Role="tblUnAuthCustomer" EntitySet="tblUnAuthCustomers" />
+            <End Role="tblBooking" EntitySet="tblBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblBookin__Payme__5812160E" Association="Self.FK__tblBookin__Payme__5812160E">
+            <End Role="tblPayment" EntitySet="tblPayments" />
+            <End Role="tblBooking" EntitySet="tblBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblCancel__Booki__619B8048" Association="Self.FK__tblCancel__Booki__619B8048">
+            <End Role="tblBooking" EntitySet="tblBookings" />
+            <End Role="tblCancellation" EntitySet="tblCancellations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblReturn__Booki__5CD6CB2B" Association="Self.FK__tblReturn__Booki__5CD6CB2B">
+            <End Role="tblBooking" EntitySet="tblBookings" />
+            <End Role="tblReturnTicket" EntitySet="tblReturnTickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblCancel__Payme__60A75C0F" Association="Self.FK__tblCancel__Payme__60A75C0F">
+            <End Role="tblPayment" EntitySet="tblPayments" />
+            <End Role="tblCancellation" EntitySet="tblCancellations" />
+          </AssociationSet>
+          <EntitySet Name="tblFeedbacks" EntityType="dbNewBusModel.tblFeedback" />
+          <AssociationSet Name="FK__tblFeedba__Booki__02FC7413" Association="dbNewBusModel.FK__tblFeedba__Booki__02FC7413">
+            <End Role="tblBooking" EntitySet="tblBookings" />
+            <End Role="tblFeedback" EntitySet="tblFeedbacks" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tblFeedback">
+          <Key>
+            <PropertyRef Name="Id_" />
+          </Key>
+          <Property Name="Id_" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookingID" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Question1" Type="Int32" />
+          <Property Name="Question2" Type="Int32" />
+          <Property Name="Question3" Type="Int32" />
+          <Property Name="Question4" Type="Int32" />
+          <Property Name="Question5" Type="Int32" />
+          <NavigationProperty Name="tblBooking" Relationship="dbNewBusModel.FK__tblFeedba__Booki__02FC7413" FromRole="tblFeedback" ToRole="tblBooking" />
+        </EntityType>
+        <Association Name="FK__tblFeedba__Booki__02FC7413">
+          <End Type="dbNewBusModel.tblBooking" Role="tblBooking" Multiplicity="0..1" />
+          <End Type="dbNewBusModel.tblFeedback" Role="tblFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBooking">
+              <PropertyRef Name="BookingID" />
+            </Principal>
+            <Dependent Role="tblFeedback">
+              <PropertyRef Name="BookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbNewBusModelStoreContainer" CdmEntityContainer="dbNewBusEntities1">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="dbNewBusModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAdmins">
+            <EntityTypeMapping TypeName="dbNewBusModel.tblAdmin">
+              <MappingFragment StoreEntitySet="tblAdmin">
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="Password_" ColumnName="Password_" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBookings">
+            <EntityTypeMapping TypeName="dbNewBusModel.tblBooking">
+              <MappingFragment StoreEntitySet="tblBooking">
+                <ScalarProperty Name="Index_Book" ColumnName="Index_Book" />
+                <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+                <ScalarProperty Name="Source_B" ColumnName="Source_B" />
+                <ScalarProperty Name="Destination_B" ColumnName="Destination_B" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="TicketType" ColumnName="TicketType" />
+                <ScalarProperty Name="TravelFare" ColumnName="TravelFare" />
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+                <ScalarProperty Name="CustUsername" ColumnName="CustUsername" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="BusNo" ColumnName="BusNo" />
+                <ScalarProperty Name="SelectedSeats" ColumnName="SelectedSeats" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBus">
+            <EntityTypeMapping TypeName="dbNewBusModel.tblBu">
+              <MappingFragment StoreEntitySet="tblBus">
+                <ScalarProperty Name="BusNo" ColumnName="BusNo" />
+                <ScalarProperty Name="NoOfSeats" ColumnName="NoOfSeats" />
+                <ScalarProperty Name="Source_" ColumnName="Source_" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="ViaStop" ColumnName="ViaStop" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="PerSeatCost" ColumnName="PerSeatCost" />
+                <ScalarProperty Name="BusType" ColumnName="BusType" />
+                <ScalarProperty Name="BusName" ColumnName="BusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCancellations">
+            <EntityTypeMapping TypeName="dbNewBusModel.tblCancellation">
+              <MappingFragment StoreEntitySet="tblCancellation">
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+                <ScalarProperty Name="Refund" ColumnName="Refund" />
+                <ScalarProperty Name="Id_" ColumnName="Id_" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCustomers">
+            <EntityTypeMapping TypeName="dbNewBusModel.tblCustomer">
+              <MappingFragment StoreEntitySet="tblCustomer">
+                <ScalarProperty Name="Index_" ColumnName="Index_" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Lname" ColumnName="Lname" />
+                <ScalarProperty Name="Password_" ColumnName="Password_" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="WalletDetails" ColumnName="WalletDetails" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPayments">
+            <EntityTypeMapping TypeName="dbNewBusModel.tblPayment">
+              <MappingFragment StoreEntitySet="tblPayment">
+                <ScalarProperty Name="Index_Pay" ColumnName="Index_Pay" />
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaymentBy" ColumnName="PaymentBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblReturnTickets">
+            <EntityTypeMapping TypeName="dbNewBusModel.tblReturnTicket">
+              <MappingFragment StoreEntitySet="tblReturnTicket">
+                <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+                <ScalarProperty Name="Return_data" ColumnName="Return_data" />
+                <ScalarProperty Name="Return_Time" ColumnName="Return_Time" />
+                <ScalarProperty Name="Id_" ColumnName="Id_" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUnAuthCustomers">
+            <EntityTypeMapping TypeName="dbNewBusModel.tblUnAuthCustomer">
+              <MappingFragment StoreEntitySet="tblUnAuthCustomer">
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Lname" ColumnName="Lname" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblFeedbacks">
+            <EntityTypeMapping TypeName="dbNewBusModel.tblFeedback">
+              <MappingFragment StoreEntitySet="tblFeedback">
+                <ScalarProperty Name="Question5" ColumnName="Question5" />
+                <ScalarProperty Name="Question4" ColumnName="Question4" />
+                <ScalarProperty Name="Question3" ColumnName="Question3" />
+                <ScalarProperty Name="Question2" ColumnName="Question2" />
+                <ScalarProperty Name="Question1" ColumnName="Question1" />
+                <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+                <ScalarProperty Name="Id_" ColumnName="Id_" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
